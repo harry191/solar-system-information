@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 class SolarSystemInformationTest {
 
 	@Test
-	void CheckUserIDLength() {
+	void CheckUserIDRequirements() {
 		
 		String input = ("XX3243");
-		
 		SolarSystemInformation ssi = new SolarSystemInformation(input, input);
-		
-		String result = ssi.lengthCheck();
-		String expected = ("Length check passed");
+		String result = ssi.requirementCheck();
+		String expected = ("Requirement check for userID passed");
 		assertEquals(expected, result);
 	}
+	
+
 
 }

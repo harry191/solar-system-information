@@ -4,23 +4,25 @@ public class SolarSystemInformation {
 
 	private String userID;
 	private String password;
-	private Boolean length;
+	private Boolean pattern;
 	
 
 	public SolarSystemInformation(String userID, String password) {
-		if (userID.length() == 6) {
-			length = true;
+		if (userID.matches("[A-Z]{2}[0-9]{4}")) {
+			pattern = true;
 		}else {
-			length = false;
+			pattern = false;
 		}
+
+		
 		
 	}
 	
-	public String lengthCheck(){
-		if (length == true) {
-			return ("Length check passed");
+	public String requirementCheck(){
+		if (pattern == true) {
+			return ("Requirement check for userID passed");
 		}else {
-			return ("Length check failed");
+			return ("Requirement check for userID failed");
 		}
 	}
 	
