@@ -23,6 +23,8 @@ public class SolarSystemInformation {
 			pattern = true;
 		}else {
 			pattern = false;
+			setObjectName("Not allowed");
+			setObjectType("Not allowed");
 		}
 	}
 	
@@ -105,13 +107,13 @@ public class SolarSystemInformation {
 //		this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
 //	}
 //
-//	private void setObjectType(String objectType) {
-//		this.objectType = objectType;
-//	}
-//
-//	private void setObjectName(String objectName) {
-//		this.objectName = objectName;
-//	}
+	private void setObjectType(String objectType) {
+		this.objectType = objectType;
+	}
+
+	private void setObjectName(String objectName) {
+		this.objectName = objectName;
+	}
 //
 //	private void setExists(Boolean exists) {
 //		this.exists = exists;
