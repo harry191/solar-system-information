@@ -40,10 +40,15 @@ public class SolarSystemInformation {
 	
 	
 	public String initialiseAOCDetails(String astronomicalObjectClassificationCode) {
-		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {
+		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
 			return "Requirement check for AOC passed";
 		}else {
-			return "Requirement check for AOC failed";
+			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
+				return "Requirement check for AOC passed";
+			}else {
+				return "Requirement check for AOC failed";
+			}
+			
 		}
 		
 	}

@@ -23,7 +23,17 @@ class SolarSystemInformationTest {
 	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() {
 
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
-		String input = "SSun27TL";
+		String input = "A3Jun401M";
+		String result = ssi.initialiseAOCDetails(input);
+		String expected = ("Requirement check for AOC passed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void CheckAOCDetailsAdvanced() {
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String input = "A99942Apo138M";
 		String result = ssi.initialiseAOCDetails(input);
 		String expected = ("Requirement check for AOC passed");
 		assertEquals(expected, result);
