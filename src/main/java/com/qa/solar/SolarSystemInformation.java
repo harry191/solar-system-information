@@ -8,11 +8,12 @@ public class SolarSystemInformation {
 	
 
 	public SolarSystemInformation(String userID, String password) {
+		System.out.println(password.length());
 		if (userID.matches("[A-Z]{2}[0-9]{4}")) {
 			pattern = true;
 		}else {
 			pattern = false;
-		}if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8}") && password.length()==8) {
+		}if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
 		}else {
 			pattern = false;
