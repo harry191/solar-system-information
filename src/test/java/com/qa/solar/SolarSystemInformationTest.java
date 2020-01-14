@@ -56,15 +56,13 @@ class SolarSystemInformationTest {
 		assertTrue(result.contains(expected));
 	}
 
-//	@Test
-//	void ToStringMethod() {
-//
-//		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
-//		String input = "PMer58M";
-//		String result = ssi.toString(input);
-//		String expected = ("Planet");
-//		assertEquals(expected, result);
-//	}
+	@Test
+	void codeDetails() {
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String result = ssi.codeDetails("C99942Apo138M");
+		assertEquals("Comet", result);
+	}
 	
 	
 

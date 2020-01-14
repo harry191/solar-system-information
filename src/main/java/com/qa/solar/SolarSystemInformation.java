@@ -51,6 +51,29 @@ public class SolarSystemInformation {
 		
 	}
 	
+	public String codeDetails(String astronomicalObjectClassificationCode) {
+		String firstChar = astronomicalObjectClassificationCode.substring(0, 1);
+		if (firstChar.equals("S")) {
+			System.out.println("Star");
+			return "Star";
+		}else if (firstChar.equals("P")) {
+			System.out.println("Planet");
+			return "Planet";
+		}else if (firstChar.equals("M")) {
+			System.out.println("Moon");
+			return "Moon";
+		}else if (firstChar.equals("D")) {
+			System.out.println("Dwarf Planet");
+			return "Dwarf Planet";
+		}else if (firstChar.equals("A")) {
+			System.out.println("Asteroid");
+			return "Asteroid";
+		}else{
+			System.out.println("Comet");
+			return "Comet";
+		}
+	}
+	
 	//public String toString(String AOC) {
 		//String stringAOC = null;	
 	//}
