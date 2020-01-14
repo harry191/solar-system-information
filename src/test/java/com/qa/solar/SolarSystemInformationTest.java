@@ -38,6 +38,23 @@ class SolarSystemInformationTest {
 		String expected = ("Requirement check for AOC passed");
 		assertEquals(expected, result);
 	}
+	
+	
+	@Test
+	void AOCExceptionCheck() throws ExceptionMsg {
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String input = "A99942ASFSAFEpo138M";
+		String expected = ("Wrong format");
+		
+		Exception exception = assertThrows(ExceptionMsg.class, ()-> {
+			ssi.initialiseAOCDetails(input);
+		});
+		
+		String result = exception.getMessage();
+		
+		assertTrue(result.contains(expected));
+	}
 
 //	@Test
 //	void ToStringMethod() {
