@@ -18,7 +18,18 @@ class SolarSystemInformationTest {
 		String expected = ("Requirement check for userID&password passed");
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() {
 
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String input = "SSun27TL";
+		String result = ssi.initialiseAOCDetails(input);
+		String expected = ("Requirement check for AOC passed");
+		assertEquals(expected, result);
+	}
+
+	
 	
 
 
