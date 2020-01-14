@@ -18,7 +18,6 @@ public class SolarSystemInformation {
 	
 
 	public SolarSystemInformation(String userID, String password) {
-		System.out.println(password.length());
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
 		}else {
@@ -51,8 +50,9 @@ public class SolarSystemInformation {
 		
 	}
 	
-	public String codeDetails(String astronomicalObjectClassificationCode) {
+	public String firstDetails(String astronomicalObjectClassificationCode) {
 		String firstChar = astronomicalObjectClassificationCode.substring(0, 1);
+
 		if (firstChar.equals("S")) {
 			System.out.println("Star");
 			return "Star";
@@ -71,6 +71,31 @@ public class SolarSystemInformation {
 		}else{
 			System.out.println("Comet");
 			return "Comet";
+		}
+		
+	}
+		
+	
+	public String lastDetails(String astronomicalObjectClassificationCode) {
+		int length = astronomicalObjectClassificationCode.length();
+		String distance = astronomicalObjectClassificationCode.substring(length-2, length);
+		String distanceLast = astronomicalObjectClassificationCode.substring(length);
+		if (distance.matches("\\A[A-Z]{1,2}")) {
+			return "Thousand Light-Years";
+		}else if (distance.matches("[A-Z]{1}")) {
+			if (distanceLast.equals("T")) {
+				return "Thousand Kilometres";
+			}else if (distanceLast.equals("M")) {
+				return "Million Kilometres";
+			}else if (distanceLast.equals("B")) {
+				return "Billion Kilometres";
+			}else if (distanceLast.equals("L")) {
+				return "Light-Years";
+			}else {
+				return "No value";
+			}
+		}else {
+			return "No value";
 		}
 	}
 	
