@@ -39,6 +39,15 @@ class SolarSystemInformationTest {
 		assertEquals(expected, result);
 	}
 
+	@Test
+	void ToStringMethod() {
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String input = "PMer58M";
+		String result = ssi.toString(input);
+		String expected = ("Planet");
+		assertEquals(expected, result);
+	}
 	
 	
 

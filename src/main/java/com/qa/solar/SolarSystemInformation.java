@@ -53,7 +53,15 @@ public class SolarSystemInformation {
 		
 	}
 	
-	
+	public String toString(String AOC) {
+		String stringAOC = null;
+		if (AOC.substring(0, 1).equals("P")) {
+			System.out.println("Planet");
+			
+		}return "Planet";
+		
+		
+	}
 	
 	
 	
