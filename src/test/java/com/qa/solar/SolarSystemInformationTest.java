@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class SolarSystemInformationTest {
 
 	@Test
-	void CheckIfFirstTwoCharactersAreAlphaUpperCase() {
+	void CheckUserIDLength() {
 		
 		String input = ("XX3243");
 		
