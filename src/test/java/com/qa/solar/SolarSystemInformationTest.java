@@ -7,13 +7,24 @@ import org.junit.jupiter.api.Test;
 
 class SolarSystemInformationTest {
 
+	String user = ("XX3243");
+	String pword = ("XXxx!!23");
+	
 	@Test
 	void CheckUserIDRequirements() {
-		
-		String input = ("XX3243");
-		SolarSystemInformation ssi = new SolarSystemInformation(input, input);
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
 		String result = ssi.requirementCheck();
-		String expected = ("Requirement check for userID passed");
+		String expected = ("Requirement check for userID&password passed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void CheckPasswordRequirements() {
+
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		String result = ssi.requirementCheck();
+		String expected = ("Requirement check for userID&password passed");
 		assertEquals(expected, result);
 	}
 	

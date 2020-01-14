@@ -12,6 +12,10 @@ public class SolarSystemInformation {
 			pattern = true;
 		}else {
 			pattern = false;
+		}if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8}") && password.length()==8) {
+			pattern = true;
+		}else {
+			pattern = false;
 		}
 
 		
@@ -20,9 +24,9 @@ public class SolarSystemInformation {
 	
 	public String requirementCheck(){
 		if (pattern == true) {
-			return ("Requirement check for userID passed");
+			return ("Requirement check for userID&password passed");
 		}else {
-			return ("Requirement check for userID failed");
+			return ("Requirement check for userID&password failed");
 		}
 	}
 	
