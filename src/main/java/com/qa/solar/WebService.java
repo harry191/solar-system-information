@@ -3,7 +3,7 @@ package com.qa.solar;
 public class WebService implements IAstroService{
 
 	public boolean authenticate (String userID, String password) {
-		return false;
+		return true;
 		
 	}
 	

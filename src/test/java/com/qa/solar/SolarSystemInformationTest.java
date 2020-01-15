@@ -14,8 +14,8 @@ class SolarSystemInformationTest {
 	void CheckUserIDPasswordRequirements() {
 
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
-		String result = ssi.requirementCheck();
-		String expected = ("Requirement check for userID&password passed");
+		boolean result = ssi.requirementCheck();
+		boolean expected = (true);
 		assertEquals(expected, result);
 	}
 	
@@ -45,7 +45,7 @@ class SolarSystemInformationTest {
 
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
 		String input = "A99942ASFSAFEpo138M";
-		String expected = ("Wrong format");
+		String expected = ("No such astronomical object classification code");
 		
 		Exception exception = assertThrows(ExceptionMsg.class, ()-> {
 			ssi.initialiseAOCDetails(input);
@@ -64,6 +64,21 @@ class SolarSystemInformationTest {
 		assertEquals("Asteroid", result);
 	}
 	
+	@Test
+	void authenticate() {
+
+		WebService ws = new WebService();
+		boolean result = ws.authenticate(user, pword);
+		assertEquals(true, result);
+	}
+	
+	@Test
+	void authenticatefail() {
+
+		SolarSystemInformation ssi = new SolarSystemInformation("username", "123");
+		boolean result = ssi.requirementCheck();
+		assertEquals(false, result);
+	}
 
 
 
