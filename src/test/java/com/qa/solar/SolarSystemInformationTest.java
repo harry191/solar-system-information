@@ -13,7 +13,8 @@ class SolarSystemInformationTest {
 	@Test
 	void CheckUserIDPasswordRequirements() {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		boolean result = ssi.requirementCheck();
 		boolean expected = (true);
 		assertEquals(expected, result);
@@ -22,7 +23,8 @@ class SolarSystemInformationTest {
 	@Test
 	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() throws ExceptionMsg {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String input = "A3Jun401M";
 		String result = ssi.initialiseAOCDetails(input);
 		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
@@ -32,7 +34,8 @@ class SolarSystemInformationTest {
 	@Test
 	void CheckAOCDetailsAdvanced() throws ExceptionMsg {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String input = "A99942Apo138M";
 		String result = ssi.initialiseAOCDetails(input);
 		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
@@ -43,7 +46,8 @@ class SolarSystemInformationTest {
 	@Test
 	void AOCExceptionCheck() throws ExceptionMsg {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String input = "A99942ASFSAFEpo138M";
 		String expected = ("No such astronomical object classification code");
 		
@@ -59,7 +63,8 @@ class SolarSystemInformationTest {
 	@Test
 	void firstCodeDetails() {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String result = ssi.firstDetails("A99942Apo138M");
 		assertEquals("Asteroid", result);
 	}
@@ -67,15 +72,18 @@ class SolarSystemInformationTest {
 	@Test
 	void authenticate() {
 
-		WebService ws = new WebService();
-		boolean result = ws.authenticate(user, pword);
-		assertEquals(true, result);
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+
+		
+
+		assertEquals("Not Allowed", ssi.getObjectName());
 	}
 	
 	@Test
 	void authenticatefail() {
-
-		SolarSystemInformation ssi = new SolarSystemInformation("username", "123");
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("username", "123", ws);
 		boolean result = ssi.requirementCheck();
 		assertEquals(false, result);
 	}

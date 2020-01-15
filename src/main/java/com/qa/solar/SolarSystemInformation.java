@@ -16,15 +16,27 @@ public class SolarSystemInformation {
 	private BigDecimal semiMajorAxis;
 	private BigDecimal mass;
 	
-	WebService ws = new WebService();
-	public SolarSystemInformation(String userID, String password) {
+	IAstroService ws = new FakeWebServicePassesAuthentication();
+	public SolarSystemInformation(String userID, String password, IAstroService as) {
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
 		}else {
 			pattern = false;
 			setObjectName("Not allowed");
 			setObjectType("Not allowed");
+			return;
 		}
+		
+		boolean result = as.authenticate(userID, password);
+		
+		if (result) {
+			pattern = false;
+			setObjectName("Not allowed");
+			setObjectType("Not allowed");
+			return;
+		}
+		
+		
 	}
 	
 	public boolean requirementCheck(){
@@ -37,7 +49,7 @@ public class SolarSystemInformation {
 	
 	
 	public String initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
-		WebService ws = new WebService();
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
 		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
 			return ws.getStatusInfo(astronomicalObjectClassificationCode);
 		}else {

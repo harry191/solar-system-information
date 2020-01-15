@@ -1,7 +1,8 @@
 package com.qa.solar;
 
-public class WebService implements IAstroService{
+public class FakeWebServicePassesAuthentication implements IAstroService {
 
+	
 	public boolean authenticate (String userID, String password) {
 		return true;
 		
