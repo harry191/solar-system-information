@@ -39,12 +39,11 @@ public class SolarSystemInformation {
 	public String initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
 		WebService ws = new WebService();
 		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
-			ws.getStatusInfo(astronomicalObjectClassificationCode);
-			return "Requirement check for AOC passed";
+			return ws.getStatusInfo(astronomicalObjectClassificationCode);
 		}else {
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
-				ws.getStatusInfo(astronomicalObjectClassificationCode);
-				return "Requirement check for AOC passed";
+				return ws.getStatusInfo(astronomicalObjectClassificationCode);
+				
 			}else {
 				throw new ExceptionMsg("Wrong format");
 			}

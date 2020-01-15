@@ -25,7 +25,7 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
 		String input = "A3Jun401M";
 		String result = ssi.initialiseAOCDetails(input);
-		String expected = ("Requirement check for AOC passed");
+		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
 		assertEquals(expected, result);
 	}
 	
@@ -35,7 +35,7 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
 		String input = "A99942Apo138M";
 		String result = ssi.initialiseAOCDetails(input);
-		String expected = ("Requirement check for AOC passed");
+		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
 		assertEquals(expected, result);
 	}
 	
