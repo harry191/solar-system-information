@@ -83,6 +83,34 @@ class SolarSystemInformationTest {
 		assertEquals(bd, actual);
 	}
 	
+	@Test
+	void CheckAOCObjectSemiMajorAxis() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		BigDecimal actual = ssi.getSemiMajorAxis();
+		BigDecimal bd = new BigDecimal("255440000000000000");
+		
+		assertEquals(bd, actual);
+	}
+	
+	@Test
+	void CheckAOCObjectMass() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		BigDecimal actual = ssi.getMass();
+		BigDecimal bd = new BigDecimal("198900000000000000000000000000");
+		
+		assertEquals(bd, actual);
+	}
+	
+	
+	
 	
 	@Test
 	void AOCExceptionCheck() throws ExceptionMsg {
