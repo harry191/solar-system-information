@@ -92,9 +92,14 @@ public class SolarSystemInformation {
 	
 
 	
-	//public String toString(String AOC) {
-		//String stringAOC = null;	
-	//}
+	public String toString(String AOC) {
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		String details = ws.getStatusInfo(AOC);
+		String[] array = details.split(",");
+		
+		return (array[1]+", "+array[2]+" ["+array[0]+"] "+array[5]+"km, "+array[6]+" kg");
+		
+	}
 	
 	
 	

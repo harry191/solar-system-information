@@ -70,22 +70,19 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
-	void authenticate() {
-
-		IAstroService ws = new FakeWebServiceFailsAuthentication();
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-
-		
-
-		assertEquals("Not Allowed", ssi.getObjectName());
-	}
-	
-	@Test
 	void authenticatefail() {
 		IAstroService ws = new FakeWebServiceFailsAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation("username", "123", ws);
 		boolean result = ssi.requirementCheck();
 		assertEquals(false, result);
+	}
+	
+	@Test
+	void toStringSeeIfSunInfoIsCorrectFormat() {
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		String result = ssi.toString("h");
+		assertEquals(" Star,  Sun [SSun27TL]  2.5544e+17km,  1.989 × 10^30 kg", result);
 	}
 
 
