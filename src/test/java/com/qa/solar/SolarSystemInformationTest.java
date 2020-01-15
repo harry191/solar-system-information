@@ -3,6 +3,7 @@ package com.qa.solar;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
 class SolarSystemInformationTest {
@@ -20,26 +21,27 @@ class SolarSystemInformationTest {
 		assertEquals(expected, result);
 	}
 	
-	@Test
-	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() throws ExceptionMsg {
-
-		IAstroService ws = new FakeWebServicePassesAuthentication();
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-		String input = "A3Jun401M";
-		String result = ssi.initialiseAOCDetails(input);
-		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
-		assertEquals(expected, result);
-	}
+//	@Test
+//	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() throws ExceptionMsg {
+//
+//		IAstroService ws = new FakeWebServicePassesAuthentication();
+//		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+//		String input = "A3Jun401M";
+//		ssi.initialiseAOCDetails(input);
+//		boolean expected = (true);
+//		assertEquals(expected, result);
+//	}
 	
 	@Test
-	void CheckAOCDetailsAdvanced() throws ExceptionMsg {
+	void CheckAOCObjectName() throws ExceptionMsg {
 
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-		String input = "A99942Apo138M";
-		String result = ssi.initialiseAOCDetails(input);
-		String expected = ("SSun27TL, Star, Sun, 83950000000, 695510, 2.5544e+17, 1.989 × 10^30");
-		assertEquals(expected, result);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		String actual = ssi.getObjectName();
+		String expected = " Sun";
+		assertEquals(expected, actual);
 	}
 	
 	

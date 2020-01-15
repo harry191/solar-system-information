@@ -20,20 +20,12 @@ public class SolarSystemInformation {
 	public SolarSystemInformation(String userID, String password, IAstroService as) {
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
+			requirementCheck();
 		}else {
 			pattern = false;
 			setObjectName("Not allowed");
 			setObjectType("Not allowed");
-			return;
-		}
-		
-		boolean result = as.authenticate(userID, password);
-		
-		if (result) {
-			pattern = false;
-			setObjectName("Not allowed");
-			setObjectType("Not allowed");
-			return;
+			
 		}
 		
 		
@@ -48,14 +40,19 @@ public class SolarSystemInformation {
 	}
 	
 	
-	public String initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
-		IAstroService ws = new FakeWebServiceFailsAuthentication();
+	public void initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
+		String[] array = info.split(",");
 		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
-			return ws.getStatusInfo(astronomicalObjectClassificationCode);
+			setObjectName(array[2]);
+			setObjectType(array[1]);
+			System.out.println(getObjectName()+getObjectType());
 		}else {
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
-				return ws.getStatusInfo(astronomicalObjectClassificationCode);
-				
+				setObjectName(array[2]);
+				setObjectType(array[1]);
+				System.out.println(getObjectName()+getObjectType());
 			}else {
 				throw new ExceptionMsg("No such astronomical object classification code");
 			}
@@ -117,9 +114,9 @@ public class SolarSystemInformation {
 //		return astronomicalObjectClassificationCode;
 //	}
 //
-//	public String getObjectType() {
-//		return objectType;
-//	}
+	public String getObjectType() {
+		return objectType;
+	}
 
 	public String getObjectName() {
 		return objectName;
