@@ -64,21 +64,7 @@ class SolarSystemInformationTest {
 		assertEquals("Asteroid", result);
 	}
 	
-	@Test
-	void lastCodeDetails() {
 
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
-		String result = ssi.lastDetails("SSun27TL");
-		assertEquals("Thousand Light-Years", result);
-	}
-	
-	@Test
-	void lastCodeDetailsV2() {
-
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword);
-		String result = ssi.lastDetails("PEar150M");
-		assertEquals("Million Kilometres", result);
-	}
 
 
 }

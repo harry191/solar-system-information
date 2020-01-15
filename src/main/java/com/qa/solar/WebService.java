@@ -7,5 +7,9 @@ public class WebService {
 		
 	}
 	
+	public String getStatusInfo (String astronomicalObjectClassificationCode) {
+		return "Test";
+	}
+	
 	
 }

@@ -11,7 +11,7 @@ public class SolarSystemInformation {
 	private String objectType;
 	private String objectName;
 	private Boolean exists;
-	private int orbitalPeriod;
+	private long orbitalPeriod;
 	private BigDecimal radius;
 	private BigDecimal semiMajorAxis;
 	private BigDecimal mass;
@@ -37,10 +37,13 @@ public class SolarSystemInformation {
 	
 	
 	public String initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
+		WebService ws = new WebService();
 		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
+			ws.getStatusInfo(astronomicalObjectClassificationCode);
 			return "Requirement check for AOC passed";
 		}else {
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
+				ws.getStatusInfo(astronomicalObjectClassificationCode);
 				return "Requirement check for AOC passed";
 			}else {
 				throw new ExceptionMsg("Wrong format");
@@ -76,28 +79,7 @@ public class SolarSystemInformation {
 	}
 		
 	
-	public String lastDetails(String astronomicalObjectClassificationCode) {
-		int length = astronomicalObjectClassificationCode.length();
-		String distance = astronomicalObjectClassificationCode.substring(length-2, length);
-		String distanceLast = astronomicalObjectClassificationCode.substring(length);
-		if (distance.matches("\\A[A-Z]{1,2}")) {
-			return "Thousand Light-Years";
-		}else if (distance.matches("[A-Z]{1}")) {
-			if (distanceLast.equals("T")) {
-				return "Thousand Kilometres";
-			}else if (distanceLast.equals("M")) {
-				return "Million Kilometres";
-			}else if (distanceLast.equals("B")) {
-				return "Billion Kilometres";
-			}else if (distanceLast.equals("L")) {
-				return "Light-Years";
-			}else {
-				return "No value";
-			}
-		}else {
-			return "No value";
-		}
-	}
+
 	
 	//public String toString(String AOC) {
 		//String stringAOC = null;	
@@ -131,9 +113,9 @@ public class SolarSystemInformation {
 //		return exists;
 //	}
 //
-//	public int getOrbitalPeriod() {
-//		return orbitalPeriod;
-//	}
+	public long getOrbitalPeriod() {
+		return orbitalPeriod;
+	}
 //
 //	public BigDecimal getRadius() {
 //		return radius;
