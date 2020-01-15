@@ -130,17 +130,17 @@ public class SolarSystemInformation {
 		return orbitalPeriod;
 	}
 //
-//	public BigDecimal getRadius() {
-//		return radius;
-//	}
-//
-//	public BigDecimal getSemiMajorAxis() {
-//		return semiMajorAxis;
-//	}
-//
-//	public BigDecimal getMass() {
-//		return mass;
-//	}
+	public BigDecimal getRadius() {
+		return radius;
+	}
+
+	public BigDecimal getSemiMajorAxis() {
+		return semiMajorAxis;
+	}
+
+	public BigDecimal getMass() {
+		return mass;
+	}
 //
 //	private void setPattern(Boolean pattern) {
 //		this.pattern = pattern;
@@ -157,26 +157,26 @@ public class SolarSystemInformation {
 	private void setObjectName(String objectName) {
 		this.objectName = objectName;
 	}
-//
-//	private void setExists(Boolean exists) {
-//		this.exists = exists;
-//	}
-//
-//	private void setOrbitalPeriod(int orbitalPeriod) {
-//		this.orbitalPeriod = orbitalPeriod;
-//	}
-//
-//	private void setRadius(BigDecimal radius) {
-//		this.radius = radius;
-//	}
-//
-//	private void setSemiMajorAxis(BigDecimal semiMajorAxis) {
-//		this.semiMajorAxis = semiMajorAxis;
-//	}
-//
-//	private void setMass(BigDecimal mass) {
-//		this.mass = mass;
-//	}
+
+	private void setExists(Boolean exists) {
+		this.exists = exists;
+	}
+
+	private void setOrbitalPeriod(int orbitalPeriod) {
+		this.orbitalPeriod = orbitalPeriod;
+	}
+
+	private void setRadius(BigDecimal radius) {
+		this.radius = radius;
+	}
+
+	private void setSemiMajorAxis(BigDecimal semiMajorAxis) {
+		this.semiMajorAxis = semiMajorAxis;
+	}
+
+	private void setMass(BigDecimal mass) {
+		this.mass = mass;
+	}
 
 
 	

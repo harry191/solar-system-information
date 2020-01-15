@@ -21,16 +21,16 @@ class SolarSystemInformationTest {
 		assertEquals(expected, result);
 	}
 	
-//	@Test
-//	void CheckAOCDetailsTwoCapitalLettersAndEightDigits() throws ExceptionMsg {
-//
-//		IAstroService ws = new FakeWebServicePassesAuthentication();
-//		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-//		String input = "A3Jun401M";
-//		ssi.initialiseAOCDetails(input);
-//		boolean expected = (true);
-//		assertEquals(expected, result);
-//	}
+	@Test
+	void CheckAOCObjectType() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.getObjectType();
+		String expected = " Star";
+		assertEquals(expected, result);
+	}
 	
 	@Test
 	void CheckAOCObjectName() throws ExceptionMsg {
@@ -72,7 +72,7 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
-	void authenticatefail() {
+	void InvalidUsernameAndPassword() {
 		IAstroService ws = new FakeWebServiceFailsAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation("username", "123", ws);
 		boolean result = ssi.requirementCheck();
@@ -80,10 +80,10 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
-	void toStringSeeIfSunInfoIsCorrectFormat() {
+	void SeeIfPlanetInfoIsCorrectFormat() {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-		String result = ssi.toString("h");
+		String result = ssi.toString("SSun27TL");
 		assertEquals(" Star,  Sun [SSun27TL]  2.5544e+17km,  1.989 × 10^30 kg", result);
 	}
 
