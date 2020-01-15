@@ -2,6 +2,7 @@ package com.qa.solar;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 
 public class SolarSystemInformation {
 
@@ -28,8 +29,7 @@ public class SolarSystemInformation {
 			setObjectType("Not allowed");
 			
 		}
-		
-		
+
 	}
 	
 	public boolean requirementCheck(){
@@ -39,7 +39,6 @@ public class SolarSystemInformation {
 			return false;
 		}
 	}
-	
 	
 	public void initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
@@ -104,35 +103,18 @@ public class SolarSystemInformation {
 		}
 		
 	}
-		
-	
-
 	
 	public String toString(String AOC) {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		String details = ws.getStatusInfo(AOC);
 		String[] array = details.split(",");
-		
-		return (array[1]+", "+array[2]+" ["+array[0]+"] "+array[5]+"km, "+array[6]+" kg");
+		MathContext mc = new MathContext(3);
+		BigDecimal bdR = new BigDecimal(array[5],mc);
+		BigDecimal bdM = new BigDecimal(array[6],mc);
+		return (array[1]+", "+array[2]+" ["+array[0]+"] "+bdR.toString()+"km, "+bdM.toString()+" kg");
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-
-
-//	public Boolean getPattern() {
-//		return pattern;
-//	}
-//
-//	public String getAstronomicalObjectClassificationCode() {
-//		return astronomicalObjectClassificationCode;
-//	}
-//
 	public String getObjectType() {
 		return objectType;
 	}
@@ -160,15 +142,7 @@ public class SolarSystemInformation {
 	public BigDecimal getMass() {
 		return mass;
 	}
-//
-//	private void setPattern(Boolean pattern) {
-//		this.pattern = pattern;
-//	}
 
-//	private void setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
-//		this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
-//	}
-//
 	private void setObjectType(String objectType) {
 		this.objectType = objectType;
 	}
@@ -195,11 +169,6 @@ public class SolarSystemInformation {
 
 	private void setMass(BigDecimal mass) {
 		this.mass = mass;
-	}
-
-
-	
-	
-	
+	}	
 	
 }

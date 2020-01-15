@@ -151,7 +151,7 @@ class SolarSystemInformationTest {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String result = ssi.toString("SSun27TL");
-		assertEquals("Star, Sun [SSun27TL] 255440000000000000km, 198900000000000000000000000000 kg", result);
+		assertEquals("Star, Sun [SSun27TL] 2.55E+17km, 1.99E+29 kg", result);
 	}
 
 
