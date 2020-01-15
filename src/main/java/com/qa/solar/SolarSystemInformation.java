@@ -1,6 +1,7 @@
 package com.qa.solar;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class SolarSystemInformation {
 
@@ -11,7 +12,7 @@ public class SolarSystemInformation {
 	private String objectType;
 	private String objectName;
 	private Boolean exists;
-	private long orbitalPeriod;
+	private BigDecimal orbitalPeriod;
 	private BigDecimal radius;
 	private BigDecimal semiMajorAxis;
 	private BigDecimal mass;
@@ -44,14 +45,32 @@ public class SolarSystemInformation {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
 		String[] array = info.split(",");
-		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {			
+		BigDecimal bd = new BigDecimal(array[4]);
+		BigDecimal bdSMA = new BigDecimal(array[5]);
+		BigDecimal bdM = new BigDecimal(array[6]);
+		BigDecimal bdOP = new BigDecimal(array[3]);
+		BigDecimal bdR = new BigDecimal(array[4]);
+		
+		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {
 			setObjectName(array[2]);
 			setObjectType(array[1]);
-			System.out.println(getObjectName()+getObjectType());
+			setExists(true);
+			setOrbitalPeriod(bdOP);
+			setRadius(bd);
+			setSemiMajorAxis(bdSMA);
+			setMass(bdM);
+			
 		}else {
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
 				setObjectName(array[2]);
 				setObjectType(array[1]);
+				setExists(true);
+				setOrbitalPeriod(bdOP);
+				setRadius(bd);
+				setSemiMajorAxis(bdSMA);
+				setMass(bdM);
+			
+				
 				System.out.println(getObjectName()+getObjectType());
 			}else {
 				throw new ExceptionMsg("No such astronomical object classification code");
@@ -126,7 +145,7 @@ public class SolarSystemInformation {
 //		return exists;
 //	}
 //
-	public long getOrbitalPeriod() {
+	public BigDecimal getOrbitalPeriod() {
 		return orbitalPeriod;
 	}
 //
@@ -162,8 +181,8 @@ public class SolarSystemInformation {
 		this.exists = exists;
 	}
 
-	private void setOrbitalPeriod(int orbitalPeriod) {
-		this.orbitalPeriod = orbitalPeriod;
+	private void setOrbitalPeriod(BigDecimal bdOP) {
+		this.orbitalPeriod = bdOP;
 	}
 
 	private void setRadius(BigDecimal radius) {

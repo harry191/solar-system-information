@@ -28,7 +28,7 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		ssi.initialiseAOCDetails("SSun27TL");
 		String result = ssi.getObjectType();
-		String expected = " Star";
+		String expected = "Star";
 		assertEquals(expected, result);
 	}
 	
@@ -40,7 +40,7 @@ class SolarSystemInformationTest {
 		ssi.initialiseAOCDetails("SSun27TL");
 		
 		String actual = ssi.getObjectName();
-		String expected = " Sun";
+		String expected = "Sun";
 		assertEquals(expected, actual);
 	}
 	
@@ -84,7 +84,7 @@ class SolarSystemInformationTest {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String result = ssi.toString("SSun27TL");
-		assertEquals(" Star,  Sun [SSun27TL]  2.5544e+17km,  1.989 × 10^30 kg", result);
+		assertEquals("Star, Sun [SSun27TL] 255440000000000000km, 198900000000000000000000000000 kg", result);
 	}
 
 
