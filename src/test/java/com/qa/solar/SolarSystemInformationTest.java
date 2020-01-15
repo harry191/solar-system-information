@@ -3,6 +3,7 @@ package com.qa.solar;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +43,44 @@ class SolarSystemInformationTest {
 		String actual = ssi.getObjectName();
 		String expected = "Sun";
 		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void CheckAOCObjectOrbitalPeriod() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		BigDecimal actual = ssi.getOrbitalPeriod();
+		BigDecimal bd = new BigDecimal("83950000000");
+		 
+		assertEquals(bd, actual);
+	}
+	
+	@Test
+	void CheckAOCObjectExists() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		Boolean actual = ssi.getExists();
+		Boolean expected = true;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void CheckAOCObjectRadius() throws ExceptionMsg {
+
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		ssi.initialiseAOCDetails("SSun27TL");
+		
+		BigDecimal actual = ssi.getRadius();
+		BigDecimal bd = new BigDecimal("695510");
+		
+		assertEquals(bd, actual);
 	}
 	
 	

@@ -141,10 +141,10 @@ public class SolarSystemInformation {
 		return objectName;
 	}
 
-//	public Boolean getExists() {
-//		return exists;
-//	}
-//
+	public Boolean getExists() {
+		return exists;
+	}
+
 	public BigDecimal getOrbitalPeriod() {
 		return orbitalPeriod;
 	}
