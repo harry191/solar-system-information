@@ -28,6 +28,216 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
+	void CheckUserIDPasswordRequirementsFail() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
+		boolean result = ssi.requirementCheck();
+		boolean expected = (false);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckObjectName() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		String result = ssi.getObjectName();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckObjectName() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		String result = ssi.getObjectName();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckObjectName() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		String result = ssi.getObjectName();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckObjectType() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		String result = ssi.getObjectType();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckObjectType() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		String result = ssi.getObjectType();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckObjectType() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		String result = ssi.getObjectType();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckObjectExists() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		boolean result = ssi.getExists();
+		boolean expected = (false);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckObjectExists() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		boolean result = ssi.getExists();
+		boolean expected = (false);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckObjectExists() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		boolean result = ssi.getExists();
+		boolean expected = (false);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckObjectOrbitalPeriod() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		BigDecimal result = ssi.getOrbitalPeriod();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckObjectOrbitalPeriod() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		BigDecimal result = ssi.getOrbitalPeriod();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckObjectOrbitalPeriod() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		BigDecimal result = ssi.getOrbitalPeriod();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckRadius() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		BigDecimal result = ssi.getRadius();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckRadius() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		BigDecimal result = ssi.getRadius();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckRadius() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		BigDecimal result = ssi.getRadius();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDUserFailCheckSemiMajorAxis() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", pword, ws);
+		BigDecimal result = ssi.getSemiMajorAxis();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDPasswordFailCheckSemiMajorAxis() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation(user, "23", ws);
+		BigDecimal result = ssi.getSemiMajorAxis();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckSemiMajorAxis() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		BigDecimal result = ssi.getSemiMajorAxis();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckMass() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		BigDecimal result = ssi.getMass();
+		BigDecimal expected = (null);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	void IDFailCheckAstronomicalObjectClassificationCode() {
+
+		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		SolarSystemInformation ssi = new SolarSystemInformation("23", "23", ws);
+		String result = ssi.getAstronomicalObjectClassificationCode();
+		String expected = ("Not allowed");
+		assertEquals(expected, result);
+	}
+	
+	@Test
 	void CheckAOCObjectType() throws ExceptionMsg {
 
 		IAstroService ws = new FakeWebServicePassesAuthentication();
@@ -278,6 +488,40 @@ class SolarSystemInformationTest {
 		Boolean result = ssi.getExists();
 		Assert.assertEquals(true, result);
 	}
+	
+	@Test
+	void EasyMockToStringMissingDataInArray() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "test,ds,ds,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		String expectedother = ("String of infomation is missing parts");
+		Exception exception = assertThrows(ExceptionMsg.class, ()-> {
+			ssi.initialiseAOCDetails("SSun27TL");
+		});
+		String result = exception.getMessage();
+		assertTrue(result.contains(expectedother));
+		
+	}
+	
+	
+	@Test
+	void EasyMockToStringDataNotInCorrectDataType() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "test,ds,ds,695510,twentytwo,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		String expectedother = ("A number is not in integer form");
+		Exception exception = assertThrows(ExceptionMsg.class, ()-> {
+			ssi.initialiseAOCDetails("SSun27TL");
+		});
+		String result = exception.getMessage();
+		assertTrue(result.contains(expectedother));
+		
+	}
+
 	
 
 	

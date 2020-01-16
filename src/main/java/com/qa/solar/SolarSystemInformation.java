@@ -29,6 +29,13 @@ public class SolarSystemInformation {
 			pattern = false;
 			setObjectName("Not allowed");
 			setObjectType("Not allowed");
+			setExists(false);
+			setOrbitalPeriod(null);
+			setRadius(null);
+			setSemiMajorAxis(null);
+			setMass(null);
+			setAstronomicalObjectClassificationCode("Not allowed");
+			
 			
 		}
 
@@ -50,20 +57,25 @@ public class SolarSystemInformation {
 				String info =  as.getStatusInfo(astronomicalObjectClassificationCode);
 				String[] array = info.split(",");
 				MathContext mc = new MathContext(3);
-				BigDecimal bd = new BigDecimal(array[4]);
-				BigDecimal bdSMA = new BigDecimal(array[5]);
-				BigDecimal bdM = new BigDecimal(array[6],mc);
-				BigDecimal bdOP = new BigDecimal(array[3]);
-				BigDecimal bdR = new BigDecimal(array[4],mc);
-				
-				setObjectName(array[2]);
-				setObjectType(array[1]);
-				setExists(true);
-				setOrbitalPeriod(bdOP);
-				setRadius(bd);
-				setSemiMajorAxis(bdSMA);
-				setMass(bdM);
-				setAstronomicalObjectClassificationCode(astronomicalObjectClassificationCode);
+				try {
+					BigDecimal bd = new BigDecimal(array[4]);
+					BigDecimal bdSMA = new BigDecimal(array[5]);
+					BigDecimal bdM = new BigDecimal(array[6],mc);
+					BigDecimal bdOP = new BigDecimal(array[3]);
+					BigDecimal bdR = new BigDecimal(array[4],mc);
+					setObjectName(array[2]);
+					setObjectType(array[1]);
+					setExists(true);
+					setOrbitalPeriod(bdOP);
+					setRadius(bd);
+					setSemiMajorAxis(bdSMA);
+					setMass(bdM);
+					setAstronomicalObjectClassificationCode(astronomicalObjectClassificationCode);
+				}catch(ArrayIndexOutOfBoundsException e) {
+					throw new ExceptionMsg("String of infomation is missing parts");
+				}catch(NumberFormatException e) {
+					throw new ExceptionMsg("A number is not in integer form");
+				}
 				
 			}else {
 					throw new ExceptionMsg("No such astronomical object classification code");
