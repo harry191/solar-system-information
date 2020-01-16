@@ -160,71 +160,20 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
-	void EasyMockStatusInfo() {
+	void EasyMockStatusInfo() throws ExceptionMsg {
 		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
 		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
 		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
 		EasyMock.replay(ias);
-		IAstroService ws = new FakeWebServicePassesAuthentication();
-		String actual = ws.getStatusInfo("SSun27TL");
-		Assert.assertEquals(expected, actual);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.getObjectName();
+		System.out.println(result);
+		Assert.assertEquals("Sun", result);
 	}
 	
-	@Test
-	void EasyMockGetObjectName() throws ExceptionMsg {
-		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
-		ssi.initialiseAOCDetails("SSun27TL");
-		String expected = "Sun";
-		EasyMock.expect(ssi.getObjectName()).andReturn(expected);
-		EasyMock.replay(ssi);
-		String actual = ssi.getObjectName();
-		Assert.assertEquals(expected, actual);
-	}
 	
-	@Test
-	void EasyMockGetObjectType() throws ExceptionMsg {
-		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
-		ssi.initialiseAOCDetails("SSun27TL");
-		String expected = "Star";
-		EasyMock.expect(ssi.getObjectType()).andReturn(expected);
-		EasyMock.replay(ssi);
-		String actual = ssi.getObjectType();
-		Assert.assertEquals(expected, actual);
-	}
 	
-	@Test
-	void EasyMockGetObjectMass() throws ExceptionMsg {
-		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
-		ssi.initialiseAOCDetails("SSun27TL");
-		BigDecimal expected = new BigDecimal("198900000000000000000000000000");
-		EasyMock.expect(ssi.getMass()).andReturn(expected);
-		EasyMock.replay(ssi);
-		BigDecimal actual = ssi.getMass();
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	void EasyMockGetObjectOrbitalPeriod() throws ExceptionMsg {
-		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
-		ssi.initialiseAOCDetails("SSun27TL");
-		BigDecimal expected = new BigDecimal("83950000000");
-		EasyMock.expect(ssi.getOrbitalPeriod()).andReturn(expected);
-		EasyMock.replay(ssi);
-		BigDecimal actual = ssi.getOrbitalPeriod();
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	void EasyMockGetObjectRadius() throws ExceptionMsg {
-		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
-		ssi.initialiseAOCDetails("SSun27TL");
-		BigDecimal expected = new BigDecimal("2");
-		EasyMock.expect(ssi.getRadius()).andReturn(expected);
-		EasyMock.replay(ssi);
-		BigDecimal actual = ssi.getRadius();
-		Assert.assertEquals(expected, actual);
-	}
-
 
 
 }

@@ -22,6 +22,7 @@ public class SolarSystemInformation {
 	public SolarSystemInformation(String userID, String password, IAstroService as) {
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
+			ws.authenticate(userID, password);
 			requirementCheck();
 		}else {
 			pattern = false;
@@ -41,26 +42,17 @@ public class SolarSystemInformation {
 	}
 	
 	public void initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
-		IAstroService ws = new FakeWebServicePassesAuthentication();
-		String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
-		String[] array = info.split(",");
-		BigDecimal bd = new BigDecimal(array[4]);
-		BigDecimal bdSMA = new BigDecimal(array[5]);
-		BigDecimal bdM = new BigDecimal(array[6]);
-		BigDecimal bdOP = new BigDecimal(array[3]);
-		BigDecimal bdR = new BigDecimal(array[4]);
-		
-		if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {
-			setObjectName(array[2]);
-			setObjectType(array[1]);
-			setExists(true);
-			setOrbitalPeriod(bdOP);
-			setRadius(bd);
-			setSemiMajorAxis(bdSMA);
-			setMass(bdM);
+		if (pattern == true) {
+			IAstroService ws = new FakeWebServicePassesAuthentication();
+			String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
+			String[] array = info.split(",");
+			BigDecimal bd = new BigDecimal(array[4]);
+			BigDecimal bdSMA = new BigDecimal(array[5]);
+			BigDecimal bdM = new BigDecimal(array[6]);
+			BigDecimal bdOP = new BigDecimal(array[3]);
+			BigDecimal bdR = new BigDecimal(array[4]);
 			
-		}else {
-			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
+			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {
 				setObjectName(array[2]);
 				setObjectType(array[1]);
 				setExists(true);
@@ -68,14 +60,28 @@ public class SolarSystemInformation {
 				setRadius(bd);
 				setSemiMajorAxis(bdSMA);
 				setMass(bdM);
-			
 				
-				System.out.println(getObjectName()+getObjectType());
 			}else {
-				throw new ExceptionMsg("No such astronomical object classification code");
+				if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
+					setObjectName(array[2]);
+					setObjectType(array[1]);
+					setExists(true);
+					setOrbitalPeriod(bdOP);
+					setRadius(bd);
+					setSemiMajorAxis(bdSMA);
+					setMass(bdM);
+				
+					
+					System.out.println(getObjectName()+getObjectType());
+				}else {
+					throw new ExceptionMsg("No such astronomical object classification code");
+				}
+				
 			}
-			
+		}else {
+			System.out.println("Not authenticated");
 		}
+
 		
 	}
 	
