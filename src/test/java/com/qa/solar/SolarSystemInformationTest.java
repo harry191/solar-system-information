@@ -168,8 +168,56 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
 		ssi.initialiseAOCDetails("SSun27TL");
 		String result = ssi.getObjectName();
-		System.out.println(result);
 		Assert.assertEquals("Sun", result);
+	}
+	
+	@Test
+	void EasyMockToString() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		ssi.toString("SSun27TL");
+		String result = ssi.toString("SSun27TL");
+		Assert.assertEquals("Star, Sun [SSun27TL] 2.55E+17km, 1.99E+29 kg", result);
+	}
+	
+	@Test
+	void EasyMockAOCName() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.getObjectName();
+		Assert.assertEquals("Sun", result);
+	}
+	
+	@Test
+	void EasyMockAOCType() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.getObjectType();
+		Assert.assertEquals("Star", result);
+	}
+	
+	@Test
+	void EasyMockAOCMass() throws ExceptionMsg {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		ssi.initialiseAOCDetails("SSun27TL");
+		BigDecimal result = ssi.getMass();
+		BigDecimal bd = new BigDecimal("198900000000000000000000000000");
+		Assert.assertEquals(bd, result);
 	}
 	
 	
