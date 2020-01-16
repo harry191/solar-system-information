@@ -17,7 +17,7 @@ public class SolarSystemInformation {
 	private BigDecimal radius;
 	private BigDecimal semiMajorAxis;
 	private BigDecimal mass;
-	
+
 	IAstroService ws = new FakeWebServicePassesAuthentication();
 	public SolarSystemInformation(String userID, String password, IAstroService as) {
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
@@ -43,16 +43,18 @@ public class SolarSystemInformation {
 	
 	public void initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
 		if (pattern == true) {
-			IAstroService ws = new FakeWebServicePassesAuthentication();
-			String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
-			String[] array = info.split(",");
-			BigDecimal bd = new BigDecimal(array[4]);
-			BigDecimal bdSMA = new BigDecimal(array[5]);
-			BigDecimal bdM = new BigDecimal(array[6]);
-			BigDecimal bdOP = new BigDecimal(array[3]);
-			BigDecimal bdR = new BigDecimal(array[4]);
+			//IAstroService ws = new FakeWebServicePassesAuthentication();
+
 			
-			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")) {
+			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")||astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
+				String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
+				String[] array = info.split(",");
+				MathContext mc = new MathContext(3);
+				BigDecimal bd = new BigDecimal(array[4]);
+				BigDecimal bdSMA = new BigDecimal(array[5]);
+				BigDecimal bdM = new BigDecimal(array[6],mc);
+				BigDecimal bdOP = new BigDecimal(array[3]);
+				BigDecimal bdR = new BigDecimal(array[4],mc);
 				setObjectName(array[2]);
 				setObjectType(array[1]);
 				setExists(true);
@@ -60,64 +62,23 @@ public class SolarSystemInformation {
 				setRadius(bd);
 				setSemiMajorAxis(bdSMA);
 				setMass(bdM);
+				setAstronomicalObjectClassificationCode(astronomicalObjectClassificationCode);
 				
 			}else {
-				if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
-					setObjectName(array[2]);
-					setObjectType(array[1]);
-					setExists(true);
-					setOrbitalPeriod(bdOP);
-					setRadius(bd);
-					setSemiMajorAxis(bdSMA);
-					setMass(bdM);
-				
-					
-					System.out.println(getObjectName()+getObjectType());
-				}else {
 					throw new ExceptionMsg("No such astronomical object classification code");
 				}
 				
 			}
-		}else {
+			else {
 			System.out.println("Not authenticated");
 		}
 
 		
 	}
 	
-	public String firstDetails(String astronomicalObjectClassificationCode) {
-		String firstChar = astronomicalObjectClassificationCode.substring(0, 1);
+	public String toString() {
 
-		if (firstChar.equals("S")) {
-			System.out.println("Star");
-			return "Star";
-		}else if (firstChar.equals("P")) {
-			System.out.println("Planet");
-			return "Planet";
-		}else if (firstChar.equals("M")) {
-			System.out.println("Moon");
-			return "Moon";
-		}else if (firstChar.equals("D")) {
-			System.out.println("Dwarf Planet");
-			return "Dwarf Planet";
-		}else if (firstChar.equals("A")) {
-			System.out.println("Asteroid");
-			return "Asteroid";
-		}else{
-			System.out.println("Comet");
-			return "Comet";
-		}
-		
-	}
-	
-	public String toString(String AOC) {
-		IAstroService ws = new FakeWebServicePassesAuthentication();
-		String details = ws.getStatusInfo(AOC);
-		String[] array = details.split(",");
-		MathContext mc = new MathContext(3);
-		BigDecimal bdR = new BigDecimal(array[5],mc);
-		BigDecimal bdM = new BigDecimal(array[6],mc);
-		return (array[1]+", "+array[2]+" ["+array[0]+"] "+bdR.toString()+"km, "+bdM.toString()+" kg");
+		return (getObjectType()+", "+getObjectName()+" ["+getAstronomicalObjectClassificationCode()+"] "+getRadius().toString()+"km, "+getMass().toString()+" kg");
 		
 	}
 	
@@ -176,5 +137,13 @@ public class SolarSystemInformation {
 	private void setMass(BigDecimal mass) {
 		this.mass = mass;
 	}	
+	
+	public String getAstronomicalObjectClassificationCode() {
+		return astronomicalObjectClassificationCode;
+	}
+
+	private void setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
+		this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
+	}
 	
 }
