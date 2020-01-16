@@ -18,11 +18,12 @@ public class SolarSystemInformation {
 	private BigDecimal semiMajorAxis;
 	private BigDecimal mass;
 
-	IAstroService ws = new FakeWebServicePassesAuthentication();
+	IAstroService as = null;
 	public SolarSystemInformation(String userID, String password, IAstroService as) {
+		this.as = as;
 		if (userID.matches("[A-Z]{2}[0-9]{4}") && password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{10,}$")) {
 			pattern = true;
-			ws.authenticate(userID, password);
+			this.as.authenticate(userID, password);
 			requirementCheck();
 		}else {
 			pattern = false;
@@ -31,11 +32,12 @@ public class SolarSystemInformation {
 			
 		}
 
+
 	}
 	
 	public boolean requirementCheck(){
 		if (pattern == true) {
-			return ws.authenticate(userID, password);
+			return as.authenticate(userID, password);
 		}else {
 			return false;
 		}
@@ -45,7 +47,7 @@ public class SolarSystemInformation {
 		if (pattern == true) {
 			
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")||astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
-				String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
+				String info =  as.getStatusInfo(astronomicalObjectClassificationCode);
 				String[] array = info.split(",");
 				MathContext mc = new MathContext(3);
 				BigDecimal bd = new BigDecimal(array[4]);
@@ -53,6 +55,7 @@ public class SolarSystemInformation {
 				BigDecimal bdM = new BigDecimal(array[6],mc);
 				BigDecimal bdOP = new BigDecimal(array[3]);
 				BigDecimal bdR = new BigDecimal(array[4],mc);
+				
 				setObjectName(array[2]);
 				setObjectType(array[1]);
 				setExists(true);

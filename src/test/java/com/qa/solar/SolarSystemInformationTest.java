@@ -18,9 +18,9 @@ class SolarSystemInformationTest {
 	String pword = ("XXxx!!23Fds");
 	
 	@Test
-	void CheckUserIDPasswordRequirements() {
+	void CheckUserIDPasswordRequirementsPass() {
 
-		IAstroService ws = new FakeWebServiceFailsAuthentication();
+		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		boolean result = ssi.requirementCheck();
 		boolean expected = (true);
@@ -115,8 +115,6 @@ class SolarSystemInformationTest {
 	}
 	
 	
-	
-	
 	@Test
 	void AOCExceptionCheck() throws ExceptionMsg {
 
@@ -178,16 +176,19 @@ class SolarSystemInformationTest {
 	@Test
 	void EasyMockToStringSecondTest() throws ExceptionMsg {
 		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
-		String expected = "Code,Type,Name,83950000000,695510,3,5";
-		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
+		String expected = "Code,Type,Name,83950000000,3,3,5";
+
+		EasyMock.expect(ias.authenticate(user, pword)).andReturn(true);
 		EasyMock.expect(ias.getStatusInfo("A99942Apo138M")).andReturn(expected);
 		EasyMock.replay(ias);
 		
+		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
 		ssi.initialiseAOCDetails("A99942Apo138M");
 		
 		
 		String result = ssi.toString();
-		Assert.assertEquals("Type, Name [Code] 3km, 5 kg", result);
+		
+		Assert.assertEquals("Type, Name [A99942Apo138M] 3km, 5 kg", result);
 	}
 	
 	@Test
