@@ -191,6 +191,39 @@ class SolarSystemInformationTest {
 		String actual = ssi.getObjectType();
 		Assert.assertEquals(expected, actual);
 	}
+	
+	@Test
+	void EasyMockGetObjectMass() throws ExceptionMsg {
+		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
+		ssi.initialiseAOCDetails("SSun27TL");
+		BigDecimal expected = new BigDecimal("198900000000000000000000000000");
+		EasyMock.expect(ssi.getMass()).andReturn(expected);
+		EasyMock.replay(ssi);
+		BigDecimal actual = ssi.getMass();
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	void EasyMockGetObjectOrbitalPeriod() throws ExceptionMsg {
+		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
+		ssi.initialiseAOCDetails("SSun27TL");
+		BigDecimal expected = new BigDecimal("83950000000");
+		EasyMock.expect(ssi.getOrbitalPeriod()).andReturn(expected);
+		EasyMock.replay(ssi);
+		BigDecimal actual = ssi.getOrbitalPeriod();
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	void EasyMockGetObjectRadius() throws ExceptionMsg {
+		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
+		ssi.initialiseAOCDetails("SSun27TL");
+		BigDecimal expected = new BigDecimal("2");
+		EasyMock.expect(ssi.getRadius()).andReturn(expected);
+		EasyMock.replay(ssi);
+		BigDecimal actual = ssi.getRadius();
+		Assert.assertEquals(expected, actual);
+	}
 
 
 
