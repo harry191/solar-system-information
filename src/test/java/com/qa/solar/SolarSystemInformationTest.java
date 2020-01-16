@@ -109,7 +109,7 @@ class SolarSystemInformationTest {
 		ssi.initialiseAOCDetails("SSun27TL");
 		
 		BigDecimal actual = ssi.getMass();
-		BigDecimal bd = new BigDecimal("198900000000000000000000000000");
+		BigDecimal bd = new BigDecimal("1.99E+29");
 		
 		assertEquals(bd, actual);
 	}
@@ -143,11 +143,12 @@ class SolarSystemInformationTest {
 	}
 	
 	@Test
-	void SeeIfPlanetInfoIsCorrectFormat() {
+	void SeeIfPlanetInfoIsCorrectFormat() throws ExceptionMsg {
 		IAstroService ws = new FakeWebServicePassesAuthentication();
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
-		String result = ssi.toString("SSun27TL");
-		assertEquals("Star, Sun [SSun27TL] 2.55E+17km, 1.99E+29 kg", result);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.toString();
+		assertEquals("Star, Sun [SSun27TL] 695510km, 1.99E+29 kg", result);
 	}
 	
 	@Test
@@ -169,9 +170,9 @@ class SolarSystemInformationTest {
 		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
 		EasyMock.replay(ias);
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
-		ssi.toString("SSun27TL");
-		String result = ssi.toString("SSun27TL");
-		Assert.assertEquals("Star, Sun [SSun27TL] 2.55E+17km, 1.99E+29 kg", result);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String result = ssi.toString();
+		Assert.assertEquals("Star, Sun [SSun27TL] 695510km, 1.99E+29 kg", result);
 	}
 	
 	@Test
@@ -179,10 +180,10 @@ class SolarSystemInformationTest {
 		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
 		String expected = "Code,Type,Name,83950000000,695510,3,5";
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
-		EasyMock.expect(ias.getStatusInfo("Code")).andReturn(expected);
+		EasyMock.expect(ias.getStatusInfo("A99942Apo138M")).andReturn(expected);
 		EasyMock.replay(ias);
 		
-		ssi.initialiseAOCDetails("Code");
+		ssi.initialiseAOCDetails("A99942Apo138M");
 		
 		
 		String result = ssi.toString();
@@ -222,7 +223,7 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ias);
 		ssi.initialiseAOCDetails("SSun27TL");
 		BigDecimal result = ssi.getMass();
-		BigDecimal bd = new BigDecimal("198900000000000000000000000000");
+		BigDecimal bd = new BigDecimal("1.99E+29");
 		Assert.assertEquals(bd, result);
 	}
 	

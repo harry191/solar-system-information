@@ -43,8 +43,6 @@ public class SolarSystemInformation {
 	
 	public void initialiseAOCDetails(String astronomicalObjectClassificationCode) throws ExceptionMsg {
 		if (pattern == true) {
-			//IAstroService ws = new FakeWebServicePassesAuthentication();
-
 			
 			if (astronomicalObjectClassificationCode.matches("\\A[A-Z]{2}[a-z]{2}[0-9]{1,8}[A-Z]{1,2}")||astronomicalObjectClassificationCode.matches("\\A[A-Z]{1}[0-9]{1,5}[A-Z]{1}[a-z]{2}[0-9]{3}[A-Z]{1}")) {
 				String info =  ws.getStatusInfo(astronomicalObjectClassificationCode);
