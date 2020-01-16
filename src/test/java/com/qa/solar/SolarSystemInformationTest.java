@@ -1,10 +1,15 @@
 package com.qa.solar;
 
 import static org.junit.Assert.assertEquals;
+
+import org.easymock.EasyMock;
+import org.easymock.EasyMock.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class SolarSystemInformationTest {
@@ -152,6 +157,39 @@ class SolarSystemInformationTest {
 		SolarSystemInformation ssi = new SolarSystemInformation(user, pword, ws);
 		String result = ssi.toString("SSun27TL");
 		assertEquals("Star, Sun [SSun27TL] 2.55E+17km, 1.99E+29 kg", result);
+	}
+	
+	@Test
+	void EasyMockStatusInfo() {
+		IAstroService ias = EasyMock.createNiceMock(IAstroService.class);
+		String expected = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+		EasyMock.expect(ias.getStatusInfo("SSun27TL")).andReturn(expected);
+		EasyMock.replay(ias);
+		IAstroService ws = new FakeWebServicePassesAuthentication();
+		String actual = ws.getStatusInfo("SSun27TL");
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	void EasyMockGetObjectName() throws ExceptionMsg {
+		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String expected = "Sun";
+		EasyMock.expect(ssi.getObjectName()).andReturn(expected);
+		EasyMock.replay(ssi);
+		String actual = ssi.getObjectName();
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	void EasyMockGetObjectType() throws ExceptionMsg {
+		SolarSystemInformation ssi = EasyMock.createNiceMock(SolarSystemInformation.class);
+		ssi.initialiseAOCDetails("SSun27TL");
+		String expected = "Star";
+		EasyMock.expect(ssi.getObjectType()).andReturn(expected);
+		EasyMock.replay(ssi);
+		String actual = ssi.getObjectType();
+		Assert.assertEquals(expected, actual);
 	}
 
 
